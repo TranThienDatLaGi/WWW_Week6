@@ -28,9 +28,9 @@ dependencies {
 
     implementation 'org.webjars:bootstrap:5.3.2'
 
-    //Log
-    implementation 'org.slf4j:slf4j-api:2.0.9'
-    implementation 'org.slf4j:slf4j-simple:2.0.9'
+//    //Log
+//    implementation 'org.slf4j:slf4j-api:2.0.9'
+//    implementation 'org.slf4j:slf4j-simple:2.0.9'
     //lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -45,6 +45,9 @@ dependencies {
     implementation 'org.thshsh:lorem-ipsum-generator:2.0.0'
     //https://github.com/datafaker-net/datafaker/
     implementation 'net.datafaker:datafaker:2.0.2'
+
+    //bcrypt
+    implementation 'at.favre.lib:bcrypt:0.10.2'
 }
 
 tasks.named('test') {

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}">
+</head>
+<body>
+<main class="container-fluid">
+    <header th:insert="~{components/header}"></header>
+    <section>
+        <h1 class="text-center">Home</h1>
+        <div class="row mt-3">
+            <th:block class="col-12 " th:each="post : ${posts}">
+                <a th:href="@{/posts/{id}(id=${post.getId()})}" class="col-12"
+                   style="color: #000;text-decoration: none;
+                   border: 1px solid #ccc; padding: 15px; border-radius: 8px; margin-bottom: 20px">
+
+                    <h3 th:inline="text" class="d-flex">Title: <h3 th:text="${post.title}" th:remove="tag"></h3></h3>
+                    <p th:inline="text">Author:
+                        <p th:remove="tag" th:text="${post.author.getFirstName() + ' ' + post.author.getLastName() }"></p>
+                    </p>
+                    <p th:inline="text">Summary:
+                        <p th:remove="tag" th:text="${post.summary}"></p>
+                    </p>
+                    <p th:inline="text">Post Date:
+                        <p th:remove="tag" th:text="${post.publishedAt}"></p>
+                    </p>
+                </a>
+            </th:block>
+        </div>
+
+        <nav class="mt-3">
+            <ul class="pagination flex-wrap justify-content-center">
+                <li th:class="page-item + ' ' + (${posts.number == 0} ? disabled)">
+                    <a class="page-link" th:href="@{/(size=${posts.size}, page=${posts.number})}">Previous</a>
+                </li>
+
+                <li th:class="page-item + ' ' + (${page == posts.number + 1} ? active)" th:each="page : ${pages}">
+                    <a class="page-link" th:href="@{/(size=${posts.size}, page=${page})}" th:text="${page}"></a>
+                </li>
+
+                <li th:class="page-item + ' ' + (${posts.number + 1 == posts.totalPages} ? disabled)">
+                    <a class="page-link" th:href="@{/(size=${posts.size}, page=${posts.number + 2})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+</main>
+<script th:src="@{/webjars/bootstrap/5.3.2/js/bootstrap.min.js}"></script>
+</body>
+</html>
