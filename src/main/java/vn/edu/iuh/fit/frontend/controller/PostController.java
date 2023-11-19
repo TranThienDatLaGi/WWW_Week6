@@ -35,19 +35,19 @@ public class PostController {
         this.postCommentRepository = postCommentRepository;
     }
 
-//    @GetMapping(value = {""})
-//    public ModelAndView openPostPaging(@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, HttpSession session) {
-//        int pageNum = page.orElse(1);
-//        int sizeNum = size.orElse(10);
-//        PageRequest pageable = PageRequest.of(pageNum - 1, sizeNum, Sort.by("publishedAt"));
-//        Page<Post> posts = postRepository.findAllByPublished(true, pageable);
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.addObject("user", session.getAttribute("user"));
-//        modelAndView.addObject("posts", posts);
-//        modelAndView.addObject("pages", IntStream.rangeClosed(1, posts.getTotalPages()).boxed().collect(Collectors.toList()));
-//        modelAndView.setViewName("post/posts");
-//        return modelAndView;
-//    }
+    @GetMapping(value = {""})
+    public ModelAndView openPostPaging(@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, HttpSession session) {
+        int pageNum = page.orElse(1);
+        int sizeNum = size.orElse(10);
+        PageRequest pageable = PageRequest.of(pageNum - 1, sizeNum, Sort.by("publishedAt"));
+        Page<Post> posts = postRepository.findAllByPublished(true, pageable);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("user", session.getAttribute("user"));
+        modelAndView.addObject("posts", posts);
+        modelAndView.addObject("pages", IntStream.rangeClosed(1, posts.getTotalPages()).boxed().collect(Collectors.toList()));
+        modelAndView.setViewName("post/posts");
+        return modelAndView;
+    }
     @GetMapping("/myPost")
     public ModelAndView openMyPost(@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, HttpSession session) {
         int pageNum = page.orElse(1);
